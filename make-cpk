@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+docker-compose build php-extensions
+docker-compose build apache-shibboleth
+docker-compose build cpk
