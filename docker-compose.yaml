@@ -1,0 +1,53 @@
+version: '3.4'
+services:
+    php-extensions:
+        image: "localhost/php-extensions"
+        build: "builds/php-extensions"
+    apache-shibboleth:
+        image: "localhost/apache-shibboleth"
+        build:
+            context: "builds/apache-shibboleth"
+            args:
+                PARAM_VUFIND_HOST: "beta.knihovny.cz"
+                PARAM_SSL_DIR: "/etc/ssl/private"
+                PARAM_APACHE_KEY_OUT: "apache2-key.pem"
+                PARAM_APACHE_CRT_OUT: "apache2-cert.pem"
+                PARAM_SHIB_KEY_OUT: "shibboleth2-sp-key.pem"
+                PARAM_SHIB_CRT_OUT: "shibboleth2-sp-cert.pem"
+                SSL_VALIDITY_DAYS: 3650
+    cpk:
+        image: "localhost/cpk"
+        hostname: "beta.knihovny.cz"
+        build:
+            context: "builds/cpk"
+            args:
+                # It actually really has to be 443 (if you want your Shibboleth SP to work)
+                PARAM_VUFIND_PORT: "443"
+                PARAM_VUFIND_SRC: "/var/www/cpk"
+        ports:
+            - "80:80"
+            # Same here with Shibboleth ..
+            - "443:443"
+        volumes:
+            - "./../CPK:/var/www/cpk:rw"
+            - "./conf/php/php.ini:/usr/local/etc/php/php.ini:ro"
+            - "./home/bashrc:/root/.bashrc:ro"
+            - "./home/bash_aliases:/root/.bash_aliases:ro"
+            - "./home/vimrc:/root/.vimrc:ro"
+            - "./conf/shib/attribute-map.xml:/etc/shibboleth/attribute-map.xml:ro"
+            - "./conf/shib/shibboleth2.xml:/etc/shibboleth/shibboleth2.xml.templ:ro"
+            - "./conf/apache/000-default.conf:/etc/apache2/sites-available/000-default.conf.templ:ro"
+        environment:
+            PARAM_VUFIND_LOCAL_MODULES: "VuFindConsole,CPK,Statistics,Debug"
+            PARAM_VUFIND_RUN_ENV: "development"
+            APACHE_RUN_USER: "www-data"
+            APACHE_RUN_GROUP: "www-data"
+            IGNORE_BOOTSTRAP_FAILURE: "false"
+        secrets:
+            - PARAM_SENTRY_SECRET_ID
+            - PARAM_SENTRY_USER_ID
+secrets:
+    PARAM_SENTRY_SECRET_ID:
+        file: ./secrets/sentry_id.txt
+    PARAM_SENTRY_USER_ID:
+        file: ./secrets/sentry_user_id.txt
