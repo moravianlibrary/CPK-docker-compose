@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+# Converts secrets to ENV
+. secrets-to-env
+
+# For now there are no secrets other than to be ported to the ENV, so make sure this process
+# is the only one who has the access to them; The access should be only via ENV since now
+rm -rf /run/secrets/*
+
+# List all environment variables
+# WARNING: possible threat of exploiting the secrets here (by saving `env` output to the docker logs)
+env
+
+# Run all start files
+if test -d /onstart; then
+    for FILE in /onstart/*; do
+        if test -x "$FILE"; then
+            "$FILE" || test "${IGNORE_BOOTSTRAP_FAILURE:-false}" == "true" || exit $?
+        else
+            echo "Warning: found non-executable file at '$FILE'" >&2
+        fi
+    done
+fi
+
+# This has to be done so that the server can create caches & logs
+chgrp -R www-data "${PARAM_VUFIND_SRC:-/var/www/src}"
+chmod -R g+w "${PARAM_VUFIND_SRC:-/var/www/src}"
+
+echo
+echo
+echo " --- Bootstrapping done! "
+echo
+echo
+
+apache2-foreground || \
+    test "${IGNORE_BOOTSTRAP_FAILURE:-false}" == "true" && \
+    echo "ERROR: apache start failed !" >&2 && \
+    while true; do sleep 1; done
