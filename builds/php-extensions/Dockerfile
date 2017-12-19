@@ -47,7 +47,11 @@ RUN a2enmod \
         shib2 \
         ssl \
         rpaf \
-        remoteip
+        remoteip \
+        proxy \
+        proxy_html \
+        proxy_http \
+        xml2enc
 
 # Prepare for php's ldap extension installation
 # https://serverfault.com/questions/633394/php-configure-not-finding-ldap-header-libraries

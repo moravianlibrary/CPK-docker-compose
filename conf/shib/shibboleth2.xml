@@ -39,8 +39,8 @@
         homeURL="https://PARAM_VUFIND_HOST/"
         metadataAttributePrefix="Meta-"
         REMOTE_USER="eduPersonPrincipalName aleph-id uid eppn persistent-id targeted-id"
-        signing="false" encryption="back"
-        >
+        signing="false"
+        encryption="back">
 
         <!--
         Controls session lifetimes, address checks, cookie handling, and the protocol handlers.
@@ -55,7 +55,7 @@
             handlerURL="https://PARAM_VUFIND_HOST/Shibboleth.sso" handlerSSL="false"
             exportLocation="https://PARAM_VUFIND_HOST/Shibboleth.sso/GetAssertion"
             exportACL="127.0.0.1 172.17.0.1"
-	    idpHistory="false" idpHistoryDays="7" cookieProps="; path=/;">
+            idpHistory="false" idpHistoryDays="7" cookieProps="; path=/;">
             
             <!--
             SessionInitiators handle session requests and relay them to a Discovery page,
