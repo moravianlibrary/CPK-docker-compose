@@ -22,7 +22,6 @@ enable_site() {
 
     sed -i \
         -e "s#PARAM_VUFIND_HOST#${PARAM_VUFIND_HOST:-localhost}#g" \
-        -e "s#PARAM_VUFIND_PORT#${PARAM_VUFIND_PORT:-443}#g" \
         -e "s#PARAM_VUFIND_RUN_ENV#${PARAM_VUFIND_RUN_ENV:-development}#g" \
         -e "s#PARAM_VUFIND_LOCAL_MODULES#${PARAM_VUFIND_LOCAL_MODULES:-VuFindConsole,CPK,Statistics,Debug}#g" \
         -e "s#PARAM_VUFIND_SRC#${PARAM_VUFIND_SRC:-/var/www/cpk}#g" \

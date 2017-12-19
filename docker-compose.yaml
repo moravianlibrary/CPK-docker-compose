@@ -21,12 +21,9 @@ services:
         build:
             context: "builds/cpk"
             args:
-                # It actually really has to be 443 (if you want your Shibboleth SP to work)
-                PARAM_VUFIND_PORT: "443"
                 PARAM_VUFIND_SRC: "/var/www/cpk"
         ports:
             - "80:80"
-            # Same here with Shibboleth ..
             - "443:443"
         volumes:
             - "./../CPK:/var/www/cpk:rw"
