@@ -53,11 +53,33 @@ enable_port() {
     fi
 }
 
+# Generate self-signed SSL/TLS certificates
+#  - https://stackoverflow.com/questions/10175812/how-to-create-a-self-signed-certificate-with-openssl
+generate_keys() {
+    local KEY_FILE="$1"
+    local CRT_FILE="$2"
+
+    if test -f "$KEY_FILE"; then
+        return 0
+    fi
+
+    openssl req \
+        -x509 \
+        -newkey rsa:4096 \
+        -nodes \
+        -keyout "$KEY_FILE" \
+        -out "$CRT_FILE" \
+        -days ${SSL_VALIDITY_DAYS} \
+        -subj '/CN=${PARAM_VUFIND_HOST}'
+}
+
 main() {
     APACHE_CONF_DIR="/etc/apache2"
 
     enable_site "000-default.conf.templ" "000-default.conf" || return $?
     enable_site "001-default-ssl.conf.templ" "001-default-ssl.conf" || return $?
+    generate_keys "$PARAM_SSL_DIR/$PARAM_SHIB_KEY_OUT" "$PARAM_SSL_DIR/$PARAM_SHIB_CRT_OUT" || return $?
+    generate_keys "$PARAM_SSL_DIR/$PARAM_APACHE_KEY_OUT" "$PARAM_SSL_DIR/$PARAM_APACHE_CRT_OUT" || return $?
     enable_port || return $?
 
     unset APACHE_CONF_DIR
