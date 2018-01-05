@@ -12,6 +12,10 @@ ARG SSL_VALIDITY_DAYS=3650
 COPY ./bootstrap-shibboleth2.sh /onstart/001-shibboleth2.sh
 COPY ./bootstrap-apache2.sh /onstart/002-apache2.sh
 
+COPY ./conf/shib/attribute-map.xml /etc/shibboleth/attribute-map.xml
+COPY ./conf/shib/shibboleth2.xml /etc/shibboleth/shibboleth2.xml.templ
+COPY ./conf/apache/000-default.conf /etc/apache2/sites-available/000-default.conf.templ
+COPY ./conf/apache/001-default-ssl.conf /etc/apache2/sites-available/001-default-ssl.conf.templ
 
 # What was specified as argument on build time, pass as ENV
 ENV PARAM_VUFIND_HOST=${PARAM_VUFIND_HOST}

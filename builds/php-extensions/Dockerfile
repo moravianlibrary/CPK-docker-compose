@@ -92,6 +92,8 @@ RUN echo "extension=apc.so \n"\
          "apc.slam_defense=1 \n"\
          "apc.serializer=php \n" >> /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
 
+COPY ./conf/php/php.ini /usr/local/etc/php/php.ini
+
 # Clean up after building from sources
 RUN apt-get purge -y \
         ${TMP_DEV_PKGS}
