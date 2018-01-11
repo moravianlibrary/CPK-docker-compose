@@ -1,0 +1,8 @@
+version: '2.3'
+services:
+    vufind:
+        extends:
+            file: docker-compose.yaml
+            service: cpk
+        env_file:
+            - vufind.deploy.env
