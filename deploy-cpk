@@ -68,10 +68,9 @@ fi
 docker_compose_file="docker-compose.${build_type}.yaml"
 
 export IMAGE_NAME="${image_name}"
-export HTTP_PORT="80"
-export HTTPS_PORT="443"
+export HTTP_PORT="8080"
+export HTTPS_PORT="8443"
 docker-compose build php-extensions
 docker-compose build apache-shibboleth
-echo docker-compose -f "$docker_compose_file" build $build_args vufind
 docker-compose -f "$docker_compose_file" build $build_args vufind
 docker-compose -f "$docker_compose_file" up

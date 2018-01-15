@@ -1,8 +1,14 @@
-version: '2.3'
+version: '2.2'
 services:
     vufind:
+        image: "localhost/${IMAGE_NAME:-cpk-source}"
         extends:
             file: docker-compose.yaml
             service: cpk
         env_file:
-            - vufind.deploy.env
+           - vufind.deploy.env
+        build:
+            context: "builds/cpk-source"
+            args:
+                PARAM_VUFIND_BRANCH: ""
+                PARAM_VUFIND_COMMIT_HASH: ""

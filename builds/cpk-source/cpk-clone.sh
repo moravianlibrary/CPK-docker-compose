@@ -3,6 +3,7 @@
 PARAM_VUFIND_BRANCH="$1"
 
 if [ ! -z "$PARAM_VUFIND_BRANCH" ]; then
+    rm -rf "$PARAM_VUFIND_SRC/log"
     echo git clone --depth 1 -b "$PARAM_VUFIND_BRANCH" "https://github.com/moravianlibrary/CPK.git" "$PARAM_VUFIND_SRC"
     git clone --depth 1 -b "$PARAM_VUFIND_BRANCH" "https://github.com/moravianlibrary/CPK.git" "$PARAM_VUFIND_SRC"
     mkdir -p "$PARAM_VUFIND_SRC/log"
