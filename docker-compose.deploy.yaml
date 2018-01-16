@@ -12,3 +12,4 @@ services:
             args:
                 PARAM_VUFIND_BRANCH: ""
                 PARAM_VUFIND_COMMIT_HASH: ""
+        network_mode: bridge
