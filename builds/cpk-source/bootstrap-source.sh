@@ -6,9 +6,8 @@ perror() {
 
 init_config_local() {
     CONFIG_LOCAL="${PARAM_VUFIND_SRC}/local/config/vufind/config.local.ini"
-    if [ -f "$CONFIG_LOCAL" ]; then
-        return 0
-    fi;
+
+    PARAM_VUFIND_URL="https://$PARAM_VUFIND_HOST:$PARAM_VUFIND_SSL_PORT/"
 
     cp /tmp/config.local.template.ini "$CONFIG_LOCAL"
     sed -i \

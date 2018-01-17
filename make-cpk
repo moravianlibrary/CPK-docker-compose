@@ -102,5 +102,4 @@ export HTTPS_PORT="${https_port}"
 docker-compose build php-extensions
 docker-compose build apache-shibboleth
 docker-compose -f "$docker_compose_file" build $build_args vufind
-echo docker-compose -f "$docker_compose_file" up $compose_args
 docker-compose -f "$docker_compose_file" up $compose_args

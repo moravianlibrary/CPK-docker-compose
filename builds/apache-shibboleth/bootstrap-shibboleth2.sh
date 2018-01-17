@@ -20,9 +20,27 @@ main() {
 
     cp "$SHIB_CONF_TEMPL_ABS_PATH" "$SHIB_CONF_ABS_PATH" || (perror "Failed altering current configuration! Probably wrong permissions?" && return 3)
 
+    if [ -z "$PARAM_VUFIND_HOST" ]; then
+        PARAM_VUFIND_HOST="localhost"
+    fi;
+
+    if [ -z "$PARAM_VUFIND_SSL_PORT" ]; then
+        PARAM_VUFIND_SSL_PORT="443"
+    fi;
+
+    if [ -z "$PARAM_VUFIND_URL" ]; then
+        PARAM_VUFIND_URL="https://$PARAM_VUFIND_HOST:$PARAM_VUFIND_SSL_PORT/"
+    fi;
+
+    if [ -z "$PARAM_VUFIND_ENTITY_ID" ]; then
+        PARAM_VUFIND_ENTITY_ID=$PARAM_VUFIND_URL
+    fi;
+
     sed -i \
-        -e "s#PARAM_VUFIND_HOST#${PARAM_VUFIND_HOST:-localhost}#g" \
-        -e "s#PARAM_VUFIND_PORT#${PARAM_VUFIND_PORT:-443}#g" \
+        -e "s#PARAM_VUFIND_HOST#${PARAM_VUFIND_HOST}#g" \
+        -e "s#PARAM_VUFIND_SSL_PORT#${PARAM_VUFIND_SSL_PORT}#g" \
+        -e "s#PARAM_VUFIND_URL#${PARAM_VUFIND_URL}#g" \
+        -e "s#PARAM_VUFIND_ENTITY_ID#${PARAM_VUFIND_ENTITY_ID}#g" \
         -e "s#PARAM_SSL_DIR#${PARAM_SSL_DIR:-/etc/ssl/private}#g" \
         -e "s#PARAM_SHIB_KEY_OUT#${PARAM_SHIB_KEY_OUT:-shibboleth2-sp-key.pem}#g" \
         -e "s#PARAM_SHIB_CRT_OUT#${PARAM_SHIB_CRT_OUT:-shibboleth2-sp-cert.pem}#g" \

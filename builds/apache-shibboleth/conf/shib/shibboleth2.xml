@@ -25,7 +25,7 @@
     <!-- To customize behavior, map hostnames and path components to applicationId and other settings. -->
     <RequestMapper type="Native">
         <RequestMap applicationId="default">
-            <Host name="PARAM_VUFIND_HOST" port="PARAM_VUFIND_PORT"/>
+            <Host name="PARAM_VUFIND_HOST" port="PARAM_VUFIND_SSL_PORT"/>
         </RequestMap>
     </RequestMapper>
 
@@ -35,8 +35,8 @@
     points into to this section.
     -->
     <ApplicationDefaults id="default" policyId="default"
-        entityID="https://PARAM_VUFIND_HOST/"
-        homeURL="https://PARAM_VUFIND_HOST/"
+        entityID="PARAM_VUFIND_ENTITY_ID/"
+        homeURL="PARAM_VUFIND_URL"
         metadataAttributePrefix="Meta-"
         REMOTE_USER="eduPersonPrincipalName aleph-id uid eppn persistent-id targeted-id"
         signing="false"
