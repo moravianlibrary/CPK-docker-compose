@@ -16,6 +16,8 @@ enable_site() {
         return 2
     fi
 
+    PARAM_VUFIND_SSL_URL="https://$PARAM_VUFIND_HOST:$PARAM_VUFIND_SSL_PORT"
+
     local APACHE_CONF_ABS_PATH="${APACHE_CONF_DIR}/${APACHE_CONF}"
     local APACHE_CONF_ENABLED_ABS_PATH="${APACHE_CONF_DIR}/${APACHE_ENABLED_CONF}"
 
@@ -32,6 +34,7 @@ enable_site() {
         -e "s#PARAM_APACHE_CRT_OUT#${PARAM_APACHE_CRT_OUT:-apache2-cert.pem}#g" \
         -e "s#PARAM_SENTRY_SECRET_ID#${PARAM_SENTRY_SECRET_ID:-NULL}#g" \
         -e "s#PARAM_SENTRY_USER_ID#${PARAM_SENTRY_USER_ID:-NULL}#g" \
+        -e "s#PARAM_VUFIND_SSL_URL#${PARAM_VUFIND_SSL_URL}#g" \
         "$APACHE_CONF_ABS_PATH" || return $?
 
     if test ! -f "$APACHE_CONF_ENABLED_ABS_PATH"; then

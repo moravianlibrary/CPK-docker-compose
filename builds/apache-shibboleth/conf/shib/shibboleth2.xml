@@ -35,7 +35,7 @@
     points into to this section.
     -->
     <ApplicationDefaults id="default" policyId="default"
-        entityID="PARAM_VUFIND_ENTITY_ID/"
+        entityID="PARAM_VUFIND_ENTITY_ID"
         homeURL="PARAM_VUFIND_URL"
         metadataAttributePrefix="Meta-"
         REMOTE_USER="eduPersonPrincipalName aleph-id uid eppn persistent-id targeted-id"
