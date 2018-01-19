@@ -3,7 +3,7 @@
 function print_usage {
     cat <<EOF
 
-USAGE: deploy_cpk [-t type] [-b branch] [--push-version ] [--help|-h]
+USAGE: make-cpk [-t type] [-b branch] [--push-version ] [--help|-h]
 
   -t                   Build type:
                            local  - for development on local machine, source code is mounted from external source
