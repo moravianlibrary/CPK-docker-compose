@@ -1,0 +1,65 @@
+version: '2.2'
+services:
+    devel:
+        image: "localhost/${IMAGE_NAME:-cpk-source}"
+        extends:
+            file: docker-compose.yaml
+            service: cpk
+        env_file:
+           - vufind.devel.env
+        build:
+            context: "builds/cpk-source"
+            args:
+                PARAM_VUFIND_BRANCH: ""
+                PARAM_VUFIND_COMMIT_HASH: ""
+        network_mode: bridge
+    devel-10000:
+        extends:
+            service: devel
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10000"
+    devel-10001:
+        extends:
+            service: devel
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10001"
+    devel-10002:
+        extends:
+            service: devel
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10002"
+    devel-10003:
+        extends:
+            service: devel
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10003"
+    devel-10004:
+        extends:
+            service: devel
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10004"
+    devel-10005:
+        extends:
+            service: devel
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10005"
+    devel-10006:
+        extends:
+            service: devel
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10006"
+    devel-10007:
+        extends:
+            service: devel
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10007"
+    devel-10008:
+        extends:
+            service: devel
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10007"
+    devel-10009:
+        extends:
+            service: devel
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10007"

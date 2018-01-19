@@ -11,6 +11,7 @@ USAGE: deploy_cpk [-t type] [-b branch] [--push-version ] [--help|-h]
   -b                   Use this git branch as source code, build type must be deploy
   -p                   HTTP port to run apache on
   -s                   HTTPS port to run apache on
+  -service             service to run
   -d                   Run docker compose in detached mode
   --help|-h            Print usage
 
@@ -30,6 +31,7 @@ push_version="false"
 http_port="80"
 https_port="443"
 detached=false
+service=vufind
 # extract options and their arguments into variables.
 while true ; do
     case "$1" in
@@ -59,6 +61,13 @@ while true ; do
                 "") shift 2 ;;
                 *) echo "Processing argument: $1 = $2";
                    https_port=$2
+                   shift 2 ;;
+            esac ;;
+         -service)
+            case "$2" in
+                "") shift 2 ;;
+                *) echo "Processing argument: $1 = $2";
+                   service=$2
                    shift 2 ;;
             esac ;;
          -d)
@@ -102,5 +111,5 @@ export HTTPS_PORT="${https_port}"
 docker-compose build php-extensions
 docker-compose build apache-shibboleth
 docker-compose build cpk
-docker-compose -f "$docker_compose_file" build $build_args vufind
-docker-compose -f "$docker_compose_file" up $compose_args
+docker-compose -f "$docker_compose_file" build $build_args $service
+docker-compose -f "$docker_compose_file" up $compose_args $service
