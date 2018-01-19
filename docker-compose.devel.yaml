@@ -57,9 +57,9 @@ services:
         extends:
             service: devel
         environment:
-            PARAM_VUFIND_SSL_PORT: "10007"
+            PARAM_VUFIND_SSL_PORT: "10008"
     devel-10009:
         extends:
             service: devel
         environment:
-            PARAM_VUFIND_SSL_PORT: "10007"
+            PARAM_VUFIND_SSL_PORT: "10009"
