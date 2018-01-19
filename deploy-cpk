@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+branch="master"
+while true ; do
+    case "$1" in
+        -b)
+            case "$2" in
+                "") shift 2 ;;
+                *) branch=$2;
+                   echo "Processing argument: $1 = $2";
+                   shift 2 ;;
+            esac ;;
+        *) break ;;
+    esac
+done
+
+port=0
+if [ true ]; then
+    for i in $(seq 10000 10009); do
+        docker_port=$((i+10000));
+        if ! netstat -ln | grep ":$docker_port " | grep -q 'LISTEN'; then
+            port=$i
+            break
+        fi  
+    done
+
+    if [ $port = 0 ]; then
+        echo "No free available port"
+        exit 1
+    fi
+    debug_port="$port"
+fi
+
+service="devel-${port}"
+http_port=$(($port+10000))
+https_port=$(($port+10443))
+
+./make-cpk -d -t devel -p $http_port -s $https_port -b $branch -service $service
+
+echo "URL: https://www.cpk-front-devel.mzk.cz:${port}/"
