@@ -4,6 +4,8 @@ services:
         extends:
             file: docker-compose.yaml
             service: cpk
+        env_file:
+           - local.env
         volumes:
             - "./../CPK:/var/www/cpk:rw"
             - "./builds/php-extensions/conf/php/php.ini:/usr/local/etc/php/php.ini:ro"
@@ -14,3 +16,4 @@ services:
             - "./home/bashrc:/root/.bashrc:ro"
             - "./home/bash_aliases:/root/.bash_aliases:ro"
             - "./home/vimrc:/root/.vimrc:ro"
+        network_mode: bridge

@@ -6,7 +6,7 @@ services:
             file: docker-compose.yaml
             service: cpk
         env_file:
-           - vufind.deploy.env
+           - deploy.env
         build:
             context: "builds/cpk-source"
             args:

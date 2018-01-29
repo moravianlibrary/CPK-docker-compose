@@ -1,2 +1,4 @@
 secrets/*.txt
-vufind.deploy.env
+deploy.env
+local.env
+devel.env
