@@ -29,7 +29,10 @@ main() {
     fi;
 
     if [ -z "$PARAM_VUFIND_URL" ]; then
-        PARAM_VUFIND_URL="https://$PARAM_VUFIND_HOST:$PARAM_VUFIND_SSL_PORT/"
+        PARAM_VUFIND_URL="https://$PARAM_VUFIND_HOST"
+        if [ "$PARAM_VUFIND_SSL_PORT" != "443" ]; then
+            PARAM_VUFIND_URL="https://$PARAM_VUFIND_HOST:$PARAM_VUFIND_SSL_PORT"
+        fi;
     fi;
 
     if [ -z "$PARAM_VUFIND_ENTITY_ID" ]; then

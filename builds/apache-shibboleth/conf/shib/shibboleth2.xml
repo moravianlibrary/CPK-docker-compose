@@ -52,8 +52,8 @@
         impact on the security of the SP. Stealing cookies/sessions is much easier with this disabled.
         -->
         <Sessions lifetime="28800" timeout="3600" checkAddress="false"
-            handlerURL="https://PARAM_VUFIND_HOST:PARAM_VUFIND_SSL_PORT/Shibboleth.sso" handlerSSL="false"
-            exportLocation="https://PARAM_VUFIND_HOST:PARAM_VUFIND_SSL_PORT/Shibboleth.sso/GetAssertion"
+            handlerURL="PARAM_VUFIND_URL/Shibboleth.sso" handlerSSL="false"
+            exportLocation="PARAM_VUFIND_URL/Shibboleth.sso/GetAssertion"
             exportACL="127.0.0.1 172.17.0.1"
             idpHistory="false" idpHistoryDays="7" cookieProps="; path=/;">
             
