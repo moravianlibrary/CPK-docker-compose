@@ -8,11 +8,14 @@ USAGE: make-cpk [-t type] [-b branch] [--push-version ] [--help|-h]
   -t                   Build type:
                            local  - for development on local machine, source code is mounted from external source
                            deploy - for deployment on production/testing environment, source code is downloaded and included in image
-  -b                   Use this git branch as source code, build type must be deploy
+  --branch|-b          Use this git branch as source code, build type must be deploy
   -p                   HTTP port to run apache on
   -s                   HTTPS port to run apache on
   -service             service to run
   -d                   Run docker compose in detached mode
+  --image|-i           Image name to use when building container with vufind
+  --version|-v         Image version to use when building container with vufind
+  --push               Push image after successful build to docker hub
   --help|-h            Print usage
 
 EOF
@@ -27,15 +30,18 @@ function last_commit {
 
 vufind_branch="master"
 build_type="local"
-push_version="false"
+push="false"
+version="latest"
 http_port="80"
 https_port="443"
+image="cpk"
+version="latest"
 detached=false
 service=vufind
 # extract options and their arguments into variables.
 while true ; do
     case "$1" in
-        -b)
+         --branch|-b)
             case "$2" in
                 "") shift 2 ;;
                 *) vufind_branch=$2;
@@ -74,11 +80,22 @@ while true ; do
             detached=true
             shift
             ;;
-         --push-version|-p)
-                case "$2" in
+         --push)
+            push="true"
+            shift
+            ;;
+         --image|-i)
+            case "$2" in
                 "") shift 2 ;;
                 *) echo "Processing argument: $1 = $2";
-                   push_version=$2
+                   image=$2
+                   shift 2 ;;
+            esac ;;
+         --version|-v)
+            case "$2" in
+                "") shift 2 ;;
+                *) echo "Processing argument: $1 = $2";
+                   version=$2
                    shift 2 ;;
             esac ;;
          --help|-h)
@@ -95,7 +112,7 @@ build_args="--build-arg PARAM_VUFIND_COMMIT_HASH=${LAST_COMMIT}"
 compose_args=""
 
 if [[ $detached == "true" ]]; then
-   compose_args="-d"
+    compose_args="-d"
 fi
 
 if [[ ! -z  $vufind_branch ]]; then
@@ -108,8 +125,13 @@ docker_compose_file="docker-compose.${build_type}.yaml"
 export IMAGE_NAME="${image_name}"
 export HTTP_PORT="${http_port}"
 export HTTPS_PORT="${https_port}"
+export IMAGE_NAME="${image}"
+export IMAGE_VERSION="${version}"
 docker-compose build php-extensions
 docker-compose build apache-shibboleth
 docker-compose build cpk
 docker-compose -f "$docker_compose_file" build $build_args $service
+if [[ $push == "true" ]]; then
+    docker-compose -f "$docker_compose_file" push $service
+fi
 docker-compose -f "$docker_compose_file" up $compose_args $service
