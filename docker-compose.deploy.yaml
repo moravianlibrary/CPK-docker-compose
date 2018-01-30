@@ -1,7 +1,7 @@
 version: '2.2'
 services:
     vufind:
-        image: "localhost/${IMAGE_NAME:-cpk-source}"
+        image: "moravianlibrary/${IMAGE_NAME:-cpk-source}:${IMAGE_VERSION:-latest}"
         extends:
             file: docker-compose.yaml
             service: cpk
