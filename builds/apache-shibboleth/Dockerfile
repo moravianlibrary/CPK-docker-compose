@@ -11,6 +11,7 @@ ARG SSL_VALIDITY_DAYS=3650
 # These scripts will make sure for proper configuration
 COPY ./bootstrap-shibboleth2.sh /onstart/001-shibboleth2.sh
 COPY ./bootstrap-apache2.sh /onstart/002-apache2.sh
+COPY ./generate_key.sh /usr/local/bin/generate_key.sh
 
 COPY ./conf/shib/attribute-map.xml /etc/shibboleth/attribute-map.xml
 COPY ./conf/shib/shibboleth2.xml /etc/shibboleth/shibboleth2.xml.templ

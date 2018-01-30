@@ -49,6 +49,9 @@ main() {
         -e "s#PARAM_SHIB_CRT_OUT#${PARAM_SHIB_CRT_OUT:-shibboleth2-sp-cert.pem}#g" \
         "$SHIB_CONF_ABS_PATH" || return $?
 
+    /usr/local/bin/generate_key.sh "$PARAM_SSL_DIR/$PARAM_SHIB_KEY_OUT" "$PARAM_SSL_DIR/$PARAM_SHIB_CRT_OUT" \
+        "$PARAM_VUFIND_HOST" "$SSL_VALIDITY_DAYS" || return $?
+
     service shibd stop &>/dev/null
     
     service shibd start || (perror "Failed starting shibboleth daemon, something may be wrong with the configuration ..." && return 4)
