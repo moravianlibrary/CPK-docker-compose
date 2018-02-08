@@ -8,6 +8,7 @@ USAGE: make-cpk [-t type] [-b branch] [--push-version ] [--help|-h]
   -t                   Build type:
                            local  - for development on local machine, source code is mounted from external source
                            deploy - for deployment on production/testing environment, source code is downloaded and included in image
+                           devel - for deployment on our testing server
   --branch|-b          Use this git branch as source code, build type must be deploy
   -p                   HTTP port to run apache on
   -s                   HTTPS port to run apache on
