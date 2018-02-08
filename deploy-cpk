@@ -32,20 +32,17 @@ while true ; do
 done
 
 port=0
-if [ true ]; then
-    for i in $(seq 10000 10009); do
-        docker_port=$((i+10000));
-        if ! netstat -ln | grep ":$docker_port " | grep -q 'LISTEN'; then
-            port=$i
-            break
-        fi  
-    done
-
-    if [ $port = 0 ]; then
-        echo "No free available port"
-        exit 1
+for i in $(seq 10000 10009); do
+    docker_port=$((i+10000));
+    if ! netstat -ln | grep ":$docker_port " | grep -q 'LISTEN'; then
+        port=$i
+        break
     fi
-    debug_port="$port"
+done
+
+if [ $port = 0 ]; then
+    echo "No free available port"
+    exit 1
 fi
 
 service="devel-${port}"
