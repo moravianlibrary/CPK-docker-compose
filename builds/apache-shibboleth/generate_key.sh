@@ -9,7 +9,7 @@ CN="$3"
 SSL_VALIDITY_DAYS="$4"
 
 if test -f "$KEY_FILE"; then
-    return 0
+    exit 0
 fi
 
 openssl req \
@@ -18,5 +18,5 @@ openssl req \
     -nodes \
     -keyout "$KEY_FILE" \
     -out "$CRT_FILE" \
-    -days ${SSL_VALIDITY_DAYS} \
-    -subj '/CN=${CN}'
+    -days "$SSL_VALIDITY_DAYS" \
+    -subj "/CN=${CN}"

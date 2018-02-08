@@ -45,7 +45,6 @@ RUN apt-get update && apt-get install -y \
 RUN a2enmod \
         rewrite \
         shib2 \
-        ssl \
         rpaf \
         remoteip \
         proxy \

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 perror() {
     echo "$@" >&2
 }
@@ -22,7 +21,6 @@ enable_site() {
     local APACHE_CONF_ENABLED_ABS_PATH="${APACHE_CONF_DIR}/${APACHE_ENABLED_CONF}"
 
     cp "$APACHE_CONF_TEMPL_ABS_PATH" "$APACHE_CONF_ABS_PATH" || (perror "Failed altering current configuration! Probably wrong permissions?" && return 3)
-    echo "$APACHE_CONF_TEMPL_ABS_PATH" "$APACHE_CONF_ABS_PATH"
 
     sed -i \
         -e "s#PARAM_VUFIND_HOST#${PARAM_VUFIND_HOST:-localhost}#g" \
@@ -60,9 +58,12 @@ main() {
     APACHE_CONF_DIR="/etc/apache2"
 
     enable_site "000-default.conf.templ" "000-default.conf" || return $?
-    enable_site "001-default-ssl.conf.templ" "001-default-ssl.conf" || return $?
-    /usr/local/bin/generate_key.sh "$PARAM_SSL_DIR/$PARAM_APACHE_KEY_OUT" "$PARAM_SSL_DIR/$PARAM_APACHE_CRT_OUT" \
-        "$PARAM_VUFIND_HOST" "$SSL_VALIDITY_DAYS" || return $?
+    if [ "$PARAM_SSL_ENABLED" == true ]; then
+        a2enmod ssl || return $?
+        enable_site "001-default-ssl.conf.templ" "001-default-ssl.conf" || return $?
+        /usr/local/bin/generate_key.sh "$PARAM_SSL_DIR/$PARAM_APACHE_KEY_OUT" "$PARAM_SSL_DIR/$PARAM_APACHE_CRT_OUT" \
+            "$PARAM_VUFIND_HOST" "$PARAM_SSL_VALIDITY_DAYS" || return $?
+    fi;
     enable_port || return $?
 
     unset APACHE_CONF_DIR
