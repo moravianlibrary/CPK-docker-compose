@@ -27,6 +27,7 @@ enable_site() {
         -e "s#PARAM_VUFIND_RUN_ENV#${PARAM_VUFIND_RUN_ENV:-development}#g" \
         -e "s#PARAM_VUFIND_LOCAL_MODULES#${PARAM_VUFIND_LOCAL_MODULES:-VuFindConsole,CPK,Statistics,Debug}#g" \
         -e "s#PARAM_VUFIND_SRC#${PARAM_VUFIND_SRC:-/var/www/cpk}#g" \
+        -e "s#PARAM_VUFIND_CONFIG_DIR#${PARAM_VUFIND_CONFIG_DIR:-knihovny}#g" \
         -e "s#PARAM_SSL_DIR#${PARAM_SSL_DIR:-/etc/ssl/private}#g" \
         -e "s#PARAM_APACHE_KEY_OUT#${PARAM_APACHE_KEY_OUT:-apache2-key.pem}#g" \
         -e "s#PARAM_APACHE_CRT_OUT#${PARAM_APACHE_CRT_OUT:-apache2-cert.pem}#g" \

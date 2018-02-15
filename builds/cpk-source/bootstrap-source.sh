@@ -5,7 +5,7 @@ perror() {
 }
 
 init_config_local() {
-    CONFIG_LOCAL="${PARAM_VUFIND_SRC}/local/config/vufind/config.local.ini"
+    CONFIG_LOCAL="${PARAM_VUFIND_SRC}/${PARAM_VUFIND_CONFIG_DIR}/config/vufind/config.local.ini"
 
     PARAM_VUFIND_URL="https://$PARAM_VUFIND_HOST:$PARAM_VUFIND_SSL_PORT/"
 
