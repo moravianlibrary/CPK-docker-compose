@@ -22,26 +22,12 @@ enable_site() {
 
     cp "$APACHE_CONF_TEMPL_ABS_PATH" "$APACHE_CONF_ABS_PATH" || (perror "Failed altering current configuration! Probably wrong permissions?" && return 3)
 
-    if [ -z "$PARAM_VUFIND_SRC" ]; then
-        PARAM_VUFIND_SRC="/var/www/cpk"
-    fi;
-
-    if [ -z "$PARAM_VUFIND_CONFIG_DIR" ]; then
-        PARAM_VUFIND_CONFIG_DIR="knihovny"
-    fi;
-
-    # Backward compability with previous configuration layout
-    VUFIND_CONFIG_DIR="${PARAM_VUFIND_SRC}/local/${PARAM_VUFIND_CONFIG_DIR}"
-    if [[ "$PARAM_VUFIND_CONFIG_DIR" == "knihovny" && ! -d "$VUFIND_CONFIG_DIR" ]] ; then
-        PARAM_VUFIND_CONFIG_DIR=""
-    fi;
-
     sed -i \
         -e "s#PARAM_VUFIND_HOST#${PARAM_VUFIND_HOST:-localhost}#g" \
         -e "s#PARAM_VUFIND_RUN_ENV#${PARAM_VUFIND_RUN_ENV:-development}#g" \
         -e "s#PARAM_VUFIND_LOCAL_MODULES#${PARAM_VUFIND_LOCAL_MODULES:-VuFindConsole,CPK,Statistics,Debug}#g" \
         -e "s#PARAM_VUFIND_SRC#${PARAM_VUFIND_SRC}#g" \
-        -e "s#PARAM_VUFIND_CONFIG_DIR#${PARAM_VUFIND_CONFIG_DIR}#g" \
+        -e "s#PARAM_VUFIND_CONFIG_ABS_DIR#${PARAM_VUFIND_CONFIG_ABS_DIR}#g" \
         -e "s#PARAM_SSL_DIR#${PARAM_SSL_DIR:-/etc/ssl/private}#g" \
         -e "s#PARAM_APACHE_KEY_OUT#${PARAM_APACHE_KEY_OUT:-apache2-key.pem}#g" \
         -e "s#PARAM_APACHE_CRT_OUT#${PARAM_APACHE_CRT_OUT:-apache2-cert.pem}#g" \

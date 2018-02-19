@@ -1,5 +1,23 @@
 #!/usr/bin/env bash
 
+# Set default values to use in bootstrap scripts
+if [ -z "$PARAM_VUFIND_SRC" ]; then
+    export PARAM_VUFIND_SRC="/var/www/cpk"
+fi;
+
+if [ -z "$PARAM_VUFIND_CONFIG_DIR" ]; then
+    export PARAM_VUFIND_CONFIG_DIR="knihovny"
+fi;
+
+# Export common configuration
+PARAM_VUFIND_CONFIG_ABS_DIR="${PARAM_VUFIND_SRC}/local/${PARAM_VUFIND_CONFIG_DIR}"
+
+# Backward compability with previous configuration layout
+if [[ "$PARAM_VUFIND_CONFIG_DIR" == "knihovny" && ! -d "$PARAM_VUFIND_CONFIG_ABS_DIR" ]] ; then
+    PARAM_VUFIND_CONFIG_ABS_DIR="${PARAM_VUFIND_SRC}/local/"
+fi;
+export PARAM_VUFIND_CONFIG_ABS_DIR
+
 # List all environment variables
 # WARNING: possible threat of exploiting the secrets here (by saving `env` output to the docker logs)
 env
