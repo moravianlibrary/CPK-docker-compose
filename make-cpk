@@ -13,6 +13,7 @@ USAGE: make-cpk [-t type] [-b branch] [--push-version ] [--help|-h]
   -p                   HTTP port to run apache on
   -s                   HTTPS port to run apache on
   -service             service to run
+  --name               container name to use
   -d                   Run docker compose in detached mode
   --image|-i           Image name to use when building container with vufind
   --version|-v         Image version to use when building container with vufind
@@ -39,6 +40,7 @@ image="cpk"
 version="latest"
 detached=false
 service=vufind
+container_name=""
 # extract options and their arguments into variables.
 while true ; do
     case "$1" in
@@ -92,6 +94,13 @@ while true ; do
                    image=$2
                    shift 2 ;;
             esac ;;
+         --name)
+            case "$2" in
+                "") shift 2 ;;
+                *) echo "Processing argument: $1 = $2";
+                   container_name=$2
+                   shift 2 ;;
+            esac ;;
          --version|-v)
             case "$2" in
                 "") shift 2 ;;
@@ -128,6 +137,7 @@ export HTTP_PORT="${http_port}"
 export HTTPS_PORT="${https_port}"
 export IMAGE_NAME="${image}"
 export IMAGE_VERSION="${version}"
+export CONTAINER_NAME="${container_name}"
 docker-compose build php-extensions
 docker-compose build apache-shibboleth
 docker-compose build cpk

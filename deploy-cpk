@@ -48,7 +48,8 @@ fi
 service="devel-${port}"
 http_port=$(($port+10000))
 https_port=$(($port+10443))
+container_name="vufind-devel-$branch"
 
-./make-cpk -d -t devel -p $http_port -s $https_port -b $branch -service $service
+./make-cpk -d -t devel -p $http_port -s $https_port -b $branch -service $service --name $container_name
 
 echo "URL: https://www.cpk-front-devel.mzk.cz:${port}/"
