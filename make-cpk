@@ -18,6 +18,7 @@ USAGE: make-cpk [-t type] [-b branch] [--push-version ] [--help|-h]
   --image|-i           Image name to use when building container with vufind
   --version|-v         Image version to use when building container with vufind
   --push               Push image after successful build to docker hub
+  --push-only          Push image after successful build to docker hub without running container
   --help|-h            Print usage
 
 EOF
@@ -33,10 +34,11 @@ function last_commit {
 vufind_branch="master"
 build_type="local"
 push="false"
+run="true"
 version="latest"
 http_port="80"
 https_port="443"
-image="cpk"
+image="vufind-cpk"
 version="latest"
 detached=false
 service=vufind
@@ -85,6 +87,11 @@ while true ; do
             ;;
          --push)
             push="true"
+            shift
+            ;;
+         --push-only)
+            push="true"
+            run="false"
             shift
             ;;
          --image|-i)
@@ -138,11 +145,23 @@ export HTTPS_PORT="${https_port}"
 export IMAGE_NAME="${image}"
 export IMAGE_VERSION="${version}"
 export CONTAINER_NAME="${container_name}"
-docker-compose build php-extensions
-docker-compose build apache-shibboleth
-docker-compose build cpk
+
+for srv in php-extensions apache-shibboleth cpk; do
+    docker-compose build "$srv"
+    if [ $? -ne 0 ]; then
+        echo "Can't build $srv, exiting"
+        exit 1
+    fi
+done
+
 docker-compose -f "$docker_compose_file" build $build_args $service
+if [ $? -ne 0 ]; then
+    echo "Can't build cpk, exiting"
+    exit 3
+fi
 if [[ $push == "true" ]]; then
     docker-compose -f "$docker_compose_file" push $service
 fi
-docker-compose -f "$docker_compose_file" up $compose_args $service
+if [[ $run == "true" ]]; then
+    docker-compose -f "$docker_compose_file" up $compose_args $service
+fi
