@@ -12,6 +12,8 @@ services:
             args:
                 PARAM_VUFIND_BRANCH: ""
                 PARAM_VUFIND_COMMIT_HASH: ""
+        volumes:
+            - "./data/devel/:/data/"
         network_mode: bridge
     devel-10000:
         extends:
