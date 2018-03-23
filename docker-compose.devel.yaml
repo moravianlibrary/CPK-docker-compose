@@ -1,7 +1,7 @@
 version: '2.2'
 services:
     devel:
-        image: "localhost/${IMAGE_NAME:-cpk-source}"
+        image: "localhost/${IMAGE_NAME:-cpk-devel}"
         extends:
             file: docker-compose.yaml
             service: cpk

@@ -1,6 +1,7 @@
 version: '2.2'
 services:
     vufind:
+        image: "localhost/${IMAGE_NAME:-cpk-local}"
         extends:
             file: docker-compose.yaml
             service: cpk

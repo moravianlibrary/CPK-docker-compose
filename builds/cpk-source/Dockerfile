@@ -1,4 +1,4 @@
-FROM localhost/cpk
+FROM localhost/cpk-base
 
 ARG PARAM_VUFIND_BRANCH=
 ARG PARAM_VUFIND_COMMIT_HASH=

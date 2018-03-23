@@ -16,10 +16,10 @@ services:
                 PARAM_SHIB_CRT_OUT: "shibboleth2-sp-cert.pem"
                 SSL_VALIDITY_DAYS: 3650
     cpk:
-        image: "localhost/${IMAGE_NAME:-cpk}"
+        image: "localhost/cpk-base"
         hostname: "beta.knihovny.cz"
         build:
-            context: "builds/cpk"
+            context: "builds/cpk-base"
             args:
                 PARAM_VUFIND_SRC: "/var/www/cpk"
         ports:
