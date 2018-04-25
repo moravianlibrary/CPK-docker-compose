@@ -11,8 +11,8 @@ ARG PARAM_SSL_ENABLED=true
 ARG PARAM_VUFIND_CONFIG_DIR=knihovny
 
 # These scripts will make sure for proper configuration
-COPY ./bootstrap-shibboleth2.sh /onstart/001-shibboleth2.sh
-COPY ./bootstrap-apache2.sh /onstart/002-apache2.sh
+COPY ./bootstrap-shibboleth2.sh /onstart/002-shibboleth2.sh
+COPY ./bootstrap-apache2.sh /onstart/003-apache2.sh
 COPY ./generate_key.sh /usr/local/bin/generate_key.sh
 
 COPY ./conf/shib/attribute-map.xml /etc/shibboleth/attribute-map.xml

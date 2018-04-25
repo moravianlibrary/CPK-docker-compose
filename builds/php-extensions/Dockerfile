@@ -8,6 +8,8 @@ LABEL description="Based on the 'php:7.1-apache-jessie' build with appended modu
 # - https://hub.docker.com/_/php/
 #
 
+ARG PARAM_XDEBUG_ENABLED=false
+
 ARG TMP_DEV_PKGS=" \
         libfreetype6-dev \
         libicu-dev \
@@ -77,8 +79,7 @@ RUN pecl install \
 
 # Enable all installed modules
 RUN docker-php-ext-enable \
-        apcu \
-        xdebug
+        apcu
 
 # Manually enable apc (it's beta version)
 # https://github.com/krakjoe/apcu/issues/137#issuecomment-150760383
@@ -96,6 +97,8 @@ RUN echo "opcache.max_accelerated_files=16000\n"\
          "opcache.validate_timestamps=0\n" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 
 COPY ./conf/php/php.ini /usr/local/etc/php/php.ini
+
+COPY ./bootstrap-php.sh /onstart/001-php.sh
 
 # Clean up after building from sources
 RUN apt-get purge -y \
