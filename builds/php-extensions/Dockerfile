@@ -66,7 +66,8 @@ RUN docker-php-ext-configure \
         gd \
         xsl \
         ldap \
-        mcrypt
+        mcrypt \
+        opcache
 
 # Install php modules provided by PECL
 RUN pecl install \
@@ -90,6 +91,9 @@ RUN echo "extension=apc.so \n"\
          "apc.entries_hint=4096 \n"\
          "apc.slam_defense=1 \n"\
          "apc.serializer=php \n" >> /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
+
+RUN echo "opcache.max_accelerated_files=16000\n"\
+         "opcache.validate_timestamps=0\n" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 
 COPY ./conf/php/php.ini /usr/local/etc/php/php.ini
 
