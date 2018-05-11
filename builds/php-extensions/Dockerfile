@@ -9,6 +9,7 @@ LABEL description="Based on the 'php:7.1-apache-jessie' build with appended modu
 #
 
 ARG PARAM_XDEBUG_ENABLED=false
+ARG PARAM_AGGRESSIVE_OPCACHE=false
 
 ARG TMP_DEV_PKGS=" \
         libfreetype6-dev \
@@ -92,9 +93,6 @@ RUN echo "extension=apc.so \n"\
          "apc.entries_hint=4096 \n"\
          "apc.slam_defense=1 \n"\
          "apc.serializer=php \n" >> /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
-
-RUN echo "opcache.max_accelerated_files=16000\n"\
-         "opcache.validate_timestamps=0\n" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 
 COPY ./conf/php/php.ini /usr/local/etc/php/php.ini
 
