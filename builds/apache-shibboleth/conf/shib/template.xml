@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<md:EntityDescriptor xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata">
+  <md:Organization>
+    <md:OrganizationName xml:lang="en">Moravian Library</md:OrganizationName>
+    <md:OrganizationDisplayName xml:lang="en">Moravian Library</md:OrganizationDisplayName>
+    <md:OrganizationURL xml:lang="en">http://www.mzk.cz/</md:OrganizationURL>
+    <md:OrganizationName xml:lang="cs">Moravská zemská knihovna</md:OrganizationName>
+    <md:OrganizationDisplayName xml:lang="cs">Moravská zemská knihovna</md:OrganizationDisplayName>
+    <md:OrganizationURL xml:lang="cs">http://www.mzk.cz/</md:OrganizationURL>
+  </md:Organization>
+  <md:ContactPerson contactType="technical">
+    <md:GivenName>Václav</md:GivenName>
+    <md:SurName>Rosecký</md:SurName>
+    <md:EmailAddress>xrosecky@mzk.cz</md:EmailAddress>
+  </md:ContactPerson>
+  <md:ContactPerson contactType="technical">
+    <md:GivenName>Jirka</md:GivenName>
+    <md:SurName>Kozlovský</md:SurName>
+    <md:EmailAddress>kozlovsky@mzk.cz</md:EmailAddress>
+  </md:ContactPerson>
+</md:EntityDescriptor>

@@ -17,6 +17,7 @@ COPY ./generate_key.sh /usr/local/bin/generate_key.sh
 
 COPY ./conf/shib/attribute-map.xml /etc/shibboleth/attribute-map.xml
 COPY ./conf/shib/shibboleth2.xml /etc/shibboleth/shibboleth2.xml.templ
+COPY ./conf/shib/template.xml /etc/shibboleth/template.xml
 COPY ./conf/apache/000-default.conf /etc/apache2/sites-available/000-default.conf.templ
 COPY ./conf/apache/001-default-ssl.conf /etc/apache2/sites-available/001-default-ssl.conf.templ
 
