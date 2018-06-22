@@ -15,6 +15,16 @@ enable_site() {
         return 2
     fi
 
+    if test -z "$PARAM_VUFIND_LOCAL_MODULES"; then
+        PARAM_VUFIND_LOCAL_MODULES="VuFindConsole,CPK,Statistics,Debug"
+        if test -d "$PARAM_VUFIND_SRC/module/VuFindApi" ; then
+            PARAM_VUFIND_LOCAL_MODULES="$PARAM_VUFIND_LOCAL_MODULES,VuFindApi"
+        fi
+        if test -d "$PARAM_VUFIND_SRC/module/MZKApi" ; then
+            PARAM_VUFIND_LOCAL_MODULES="$PARAM_VUFIND_LOCAL_MODULES,MZKApi"
+        fi
+    fi
+
     PARAM_VUFIND_SSL_URL="https://$PARAM_VUFIND_HOST:$PARAM_VUFIND_SSL_PORT"
 
     local APACHE_CONF_ABS_PATH="${APACHE_CONF_DIR}/${APACHE_CONF}"
@@ -25,7 +35,7 @@ enable_site() {
     sed -i \
         -e "s#PARAM_VUFIND_HOST#${PARAM_VUFIND_HOST:-localhost}#g" \
         -e "s#PARAM_VUFIND_RUN_ENV#${PARAM_VUFIND_RUN_ENV:-development}#g" \
-        -e "s#PARAM_VUFIND_LOCAL_MODULES#${PARAM_VUFIND_LOCAL_MODULES:-VuFindConsole,CPK,Statistics,Debug}#g" \
+        -e "s#PARAM_VUFIND_LOCAL_MODULES#${PARAM_VUFIND_LOCAL_MODULES}#g" \
         -e "s#PARAM_VUFIND_SRC#${PARAM_VUFIND_SRC}#g" \
         -e "s#PARAM_VUFIND_CONFIG_ABS_DIR#${PARAM_VUFIND_CONFIG_ABS_DIR}#g" \
         -e "s#PARAM_SSL_DIR#${PARAM_SSL_DIR:-/etc/ssl/private}#g" \
