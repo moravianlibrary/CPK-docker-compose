@@ -30,11 +30,23 @@ init_eds_config() {
         return 0
     fi;
 
+    # for compability with older versions before bug 990
     sed -i \
         -e "s#PARAM_VUFIND_EDS_LOGIN#${PARAM_VUFIND_EDS_LOGIN}#g" \
         -e "s#PARAM_VUFIND_EDS_PASSWD#${PARAM_VUFIND_EDS_PASSWD}#g" \
         -e "s#PARAM_VUFIND_EDS_PROFILE#${PARAM_VUFIND_EDS_PROFILE}#g" \
         "$CONFIG_EDS"
+
+    # bug 990 - login configuration moved from EDS.ini to EDS.local.ini
+    CONFIG_LOCAL_EDS="${PARAM_VUFIND_CONFIG_ABS_DIR}/config/vufind/EDS.local.ini"
+    if [ ! -d "$CONFIG_LOCAL_EDS" ]; then
+        cp /tmp/EDS.local.template.ini "$CONFIG_LOCAL_EDS"
+        sed -i \
+            -e "s#PARAM_VUFIND_EDS_LOGIN#${PARAM_VUFIND_EDS_LOGIN}#g" \
+            -e "s#PARAM_VUFIND_EDS_PASSWD#${PARAM_VUFIND_EDS_PASSWD}#g" \
+            -e "s#PARAM_VUFIND_EDS_PROFILE#${PARAM_VUFIND_EDS_PROFILE}#g" \
+            "$CONFIG_LOCAL_EDS"
+    fi;
 }
 
 init_config_local "$@"
