@@ -13,9 +13,4 @@
     <md:SurName>Rosecký</md:SurName>
     <md:EmailAddress>xrosecky@mzk.cz</md:EmailAddress>
   </md:ContactPerson>
-  <md:ContactPerson contactType="technical">
-    <md:GivenName>Jirka</md:GivenName>
-    <md:SurName>Kozlovský</md:SurName>
-    <md:EmailAddress>kozlovsky@mzk.cz</md:EmailAddress>
-  </md:ContactPerson>
 </md:EntityDescriptor>
