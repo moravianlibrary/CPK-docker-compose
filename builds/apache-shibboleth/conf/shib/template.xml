@@ -4,14 +4,30 @@
   <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:1.0:protocol">
 
     <md:Extensions>
+
+      <EntityAttributes xmlns="urn:oasis:names:tc:SAML:metadata:attribute">
+        <Attribute xmlns="urn:oasis:names:tc:SAML:2.0:assertion" Name="http://macedir.org/entity-category"  NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+          <AttributeValue>http://www.geant.net/uri/dataprotection-code-of-conduct/v1</AttributeValue>
+        </Attribute>
+        <Attribute xmlns="urn:oasis:names:tc:SAML:2.0:assertion" Name="http://macedir.org/entity-category"  NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+          <AttributeValue>http://refeds.org/category/research-and-scholarship</AttributeValue>
+        </Attribute>
+        <Attribute xmlns="urn:oasis:names:tc:SAML:2.0:assertion" Name="http://macedir.org/entity-category"  NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+          <AttributeValue>https://refeds.org/sirtf</AttributeValue>
+        </Attribute>
+      </EntityAttributes>
+
       <UIInfo xmlns="urn:oasis:names:tc:SAML:metadata:ui">
         <DisplayName xml:lang="en">Czech libraries in one place</DisplayName>
         <Description xml:lang="en">Czech libraries in one place</Description>
         <InformationURL xml:lang="en">https://www.knihovny.cz/Portal/Page/o-portalu</InformationURL>
+        <PrivacyStatementURL xml:lang="en">https://www.knihovny.cz/Portal/Page/ochrana-osobnich-udaju</PrivacyStatementURL>
         <DisplayName xml:lang="cs">České knihovny na jednom místě</DisplayName>
         <Description xml:lang="cs">České knihovny na jednom místě</Description>
         <InformationURL xml:lang="cs">https://www.knihovny.cz/Portal/Page/o-portalu</InformationURL>
+        <PrivacyStatementURL xml:lang="cs">https://www.knihovny.cz/Portal/Page/ochrana-osobnich-udaju</PrivacyStatementURL>
       </UIInfo>
+
     </md:Extensions>
 
     <md:AttributeConsumingService index="0">
@@ -59,6 +75,11 @@
     <md:GivenName>Václav</md:GivenName>
     <md:SurName>Rosecký</md:SurName>
     <md:EmailAddress>mailto:xrosecky@mzk.cz</md:EmailAddress>
+  </md:ContactPerson>
+
+  <md:ContactPerson contactType="other" xmlns:remd="http://refeds.org/metadata" remd:contactType="http://refeds.org/metadata/contactType/security">
+    <md:GivenName>Security Response Team</md:GivenName>
+    <md:EmailAddress>mailto:abuse@mzk.cz</md:EmailAddress>
   </md:ContactPerson>
 
 </md:EntityDescriptor>
