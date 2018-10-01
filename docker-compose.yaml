@@ -29,3 +29,4 @@ services:
             APACHE_RUN_USER: "www-data"
             APACHE_RUN_GROUP: "www-data"
             IGNORE_BOOTSTRAP_FAILURE: "false"
+            PARAM_VUFIND_CONFIG_DIR: ${PARAM_VUFIND_CONFIG_DIR}
