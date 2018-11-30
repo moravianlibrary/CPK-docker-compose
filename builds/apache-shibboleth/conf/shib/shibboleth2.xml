@@ -175,6 +175,10 @@
                               backingFilePath="/etc/shibboleth/cesnet-proxy-idp.xml"
                               reloadInterval="7200"/>
 
+            <MetadataProvider type="XML" uri="https://metadata.eduid.cz/entities/socialidps"
+                              backingFilePath="/etc/shibboleth/cesnet-social-idp.xml"
+                              reloadInterval="7200"/>
+
         </MetadataProvider>
 
         <!-- Chain the two built-in trust engines together. -->
