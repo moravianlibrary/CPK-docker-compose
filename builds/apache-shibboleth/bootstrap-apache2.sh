@@ -44,8 +44,7 @@ enable_site() {
         -e "s#PARAM_SSL_DIR#${PARAM_SSL_DIR:-/etc/ssl/private}#g" \
         -e "s#PARAM_APACHE_KEY_OUT#${PARAM_APACHE_KEY_OUT:-apache2-key.pem}#g" \
         -e "s#PARAM_APACHE_CRT_OUT#${PARAM_APACHE_CRT_OUT:-apache2-cert.pem}#g" \
-        -e "s#PARAM_SENTRY_SECRET_ID#${PARAM_SENTRY_SECRET_ID:-NULL}#g" \
-        -e "s#PARAM_SENTRY_USER_ID#${PARAM_SENTRY_USER_ID:-NULL}#g" \
+        -e "s#PARAM_SENTRY_DSN#${PARAM_SENTRY_DSN}#g" \
         -e "s#PARAM_VUFIND_SSL_URL#${PARAM_VUFIND_SSL_URL}#g" \
         "$APACHE_CONF_ABS_PATH" || return $?
 
