@@ -163,6 +163,7 @@
         <!-- Chains together all your metadata sources. -->
         <MetadataProvider type="Chaining">
 
+            <!-- eduID.cz -->
             <MetadataProvider type="XML" uri="https://metadata.eduid.cz/entities/eduid+idp"
                               backingFilePath="/etc/shibboleth/eduid-metadata.xml" 
                               reloadInterval="7200"/>
@@ -177,6 +178,11 @@
 
             <MetadataProvider type="XML" uri="https://login.cesnet.cz/proxy/saml2/idp/metadata.php"
                               backingFilePath="/etc/shibboleth/cesnet-proxy-idp.xml"
+                              reloadInterval="7200"/>
+
+            <!-- hosted IdPs by knihovny.cz not in eduID.cz federation -->
+            <MetadataProvider type="XML" uri="https://vfu.knihovny.cz/metadata.xml"
+                              backingFilePath="/etc/shibboleth/vfu-knihovny-idp.xml"
                               reloadInterval="7200"/>
 
         </MetadataProvider>
