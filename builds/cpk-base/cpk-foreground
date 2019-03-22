@@ -9,6 +9,10 @@ if [ -z "$PARAM_VUFIND_CONFIG_DIR" ]; then
     export PARAM_VUFIND_CONFIG_DIR="knihovny"
 fi;
 
+if [[ -n "$PARAM_VUFIND_ROBOTS_TXT" && -e "${PARAM_VUFIND_SRC}/public/$PARAM_VUFIND_ROBOTS_TXT" ]]; then
+    cp "${PARAM_VUFIND_SRC}/public/$PARAM_VUFIND_ROBOTS_TXT" "${PARAM_VUFIND_SRC}/public/robots.txt"
+fi;
+
 # Export common configuration
 PARAM_VUFIND_CONFIG_ABS_DIR="${PARAM_VUFIND_SRC}/local/${PARAM_VUFIND_CONFIG_DIR}"
 
