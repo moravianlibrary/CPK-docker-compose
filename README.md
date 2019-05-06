@@ -44,36 +44,30 @@ Under the `apache-shibboleth` is `php-extensions` container, which inherits from
  git clone https://github.com/moravianlibrary/CPK.git
  
  # Clone this repository
- git clone https://github.com/jirislav/CPK-docker-compose.git
+ git clone https://github.com/moravianlibrary/CPK-docker-compose.git
  ```
  
  Now, you're ready to taste the power of the `docker-compose` :) 
  ```bash
- cd CPK-docker-compose
- 
- # Create dummy secrets
- cp secrets/sentry_id.txt{.example,}
- cp secrets/sentry_user_id.txt{.example,}
- 
  # Add the hostname beta.knihovny.cz to your /etc/hosts
  echo "127.0.0.1        beta.knihovny.cz" | sudo tee -a /etc/hosts
  
+ cd CPK-docker-compose 
+
  # Build docker images
  ./make-cpk
- 
- # Start CPK container as a daemon
- ./start-cpk -d
- 
- # Show running logs
- ./tailf-cpk  # Hit CTRL + c after a while ...
  
  # Visit https://beta.knihovny.cz/ in your browser
  # - it probably won't work because of your missing configuration
  
+ # Go and configure your CPK-docker-compose
+ cp local.env{.example,}
+ vim local.env
+ 
  # Go and configure your CPK
  cd ..
  cd CPK
- cd local/config/vufind
+ cd local/knihovny/config/vufind
  cp config.local.ini{.example,}
  vim config.local.ini
  
