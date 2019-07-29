@@ -29,7 +29,7 @@ EOF
 function last_commit {
     local branch=$1
     local url="https://api.github.com/repos/moravianlibrary/CPK/commits?sha=$branch"
-    local sha=`curl "$url" | php -r "echo (string) json_decode(file_get_contents('php://stdin'))[0]->sha;"`
+    local sha=`curl --silent "$url" | python -c 'import json,sys; print(json.load(sys.stdin)[0]["sha"]);'`
     echo $sha
 }
 
