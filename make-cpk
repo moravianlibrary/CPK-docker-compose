@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 function print_usage {
     cat <<EOF
 
