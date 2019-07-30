@@ -2,7 +2,7 @@
 
 This project enables anyone familiar with [vufind](https://github.com/vufind-org/vufind) easily deploy his application using a Docker container.
 
-It is based on Debian "jessie", with php7.1 taken from [here](https://hub.docker.com/_/php/). Concrete image is called `php7.1-apache-jessie`.
+It is based on Debian "buster", with php7.3 taken from [here](https://hub.docker.com/_/php/). Concrete image is called `php7.3-apache-buster`.
 
 ### How does it work?
 
@@ -23,7 +23,7 @@ Under the `apache-shibboleth` is `php-extensions` container, which inherits from
  - iputils-tracepath
  - mc
  - mlocate
- - mysql-client
+ - default-mysql-client
  - net-tools
  - ssh
  - vim
@@ -44,7 +44,7 @@ Under the `apache-shibboleth` is `php-extensions` container, which inherits from
  git clone https://github.com/moravianlibrary/CPK.git
  
  # Clone this repository
- git clone https://github.com/jirislav/CPK-docker-compose.git
+ git clone https://github.com/moravianlibrary/CPK-docker-compose.git
  ```
  
  Now, you're ready to taste the power of the `docker-compose` :) 

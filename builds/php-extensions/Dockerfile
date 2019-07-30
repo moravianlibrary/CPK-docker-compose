@@ -1,7 +1,7 @@
 FROM php:7.3-apache-buster
 LABEL maintainer="Moravian Library <cpk-dev@mzk.cz>"
 LABEL version="1.0"
-LABEL description="Based on the 'php:7.1-apache-jessie' build with appended modules to php & apache2 + productivity tools included (vim, mc, htop, ping, traceroute, dig, ssh, mysql-client, locate, git, curl, bash-completion)"
+LABEL description="Based on the 'php:7.3-apache-buster' build with appended modules to php & apache2 + productivity tools included (vim, mc, htop, ping, traceroute, dig, ssh, default-mysql-client, locate, git, curl, bash-completion)"
 
 #
 # See the docs for the php docker image:
