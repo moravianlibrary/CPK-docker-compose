@@ -1,4 +1,4 @@
-FROM php:7.1-apache-jessie
+FROM php:7.3-apache-buster
 LABEL maintainer="Moravian Library <cpk-dev@mzk.cz>"
 LABEL version="1.0"
 LABEL description="Based on the 'php:7.1-apache-jessie' build with appended modules to php & apache2 + productivity tools included (vim, mc, htop, ping, traceroute, dig, ssh, mysql-client, locate, git, curl, bash-completion)"
@@ -36,7 +36,7 @@ RUN apt-get update && apt-get install -y \
         libapache2-mod-shib2 \
         mc \
         mlocate \
-        mysql-client \
+        default-mysql-client \
         net-tools \
         ssh \
         vim \
@@ -47,7 +47,7 @@ RUN apt-get update && apt-get install -y \
 # Enable apache modules
 RUN a2enmod \
         rewrite \
-        shib2 \
+        shib \
         rpaf \
         remoteip \
         proxy \
@@ -69,14 +69,14 @@ RUN docker-php-ext-configure \
         gd \
         xsl \
         ldap \
-        mcrypt \
         opcache
 
 # Install php modules provided by PECL
 RUN pecl install \
         apcu \
         apcu_bc-beta \
-        xdebug
+        xdebug \
+        mcrypt-1.0.2
 
 # Enable all installed modules
 RUN docker-php-ext-enable \
