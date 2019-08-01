@@ -94,7 +94,9 @@ RUN echo "extension=apc.so \n"\
          "apc.slam_defense=1 \n"\
          "apc.serializer=php \n" >> /usr/local/etc/php/conf.d/docker-php-ext-apcu.ini
 
-COPY ./conf/php/php.ini /usr/local/etc/php/php.ini
+RUN echo "opcache.enable=1 \n"\
+         "opcache.memory_consumption=128 \n"\
+         "opcache.max_accelerated_files=8000 \n" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 
 COPY ./bootstrap-php.sh /onstart/001-php.sh
 
