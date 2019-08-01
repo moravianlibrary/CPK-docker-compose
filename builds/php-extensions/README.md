@@ -15,6 +15,7 @@ There are bundled these `php` extensions:
  - mcrypt
  - apcu
  - xdebug
+ - newrelic
 
 Also there are installed & enabled those modules to the `apache2`:
 

@@ -97,6 +97,16 @@ RUN echo "extension=apc.so \n"\
 COPY ./conf/php/php.ini /usr/local/etc/php/php.ini
 
 COPY ./bootstrap-php.sh /onstart/001-php.sh
+COPY ./bootstrap-newrelic.sh /onstart/002-newrelic.sh
+
+# Enable NewRelic
+RUN curl --silent https://download.newrelic.com/548C16BF.gpg | apt-key add -
+RUN echo "deb http://apt.newrelic.com/debian/ newrelic non-free" > /etc/apt/sources.list.d/newrelic.list
+RUN apt update && apt install -y newrelic-php5 && apt-get clean
+# Add newrelic .so module
+RUN NR_INSTALL_SILENT=1 newrelic-install  install ; rm /usr/local/etc/php/conf.d/newrelic.ini
+COPY conf/php/newrelic.ini /usr/local/etc/php/conf.d/newrelic.ini.disabled
+
 
 # Clean up after building from sources
 RUN apt-get purge -y \
