@@ -53,6 +53,7 @@ RUN a2enmod \
         proxy \
         proxy_html \
         proxy_http \
+        expires \
         xml2enc
 
 # Prepare for php's ldap extension installation
