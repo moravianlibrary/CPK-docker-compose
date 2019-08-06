@@ -16,7 +16,7 @@ enable_site() {
     fi
 
     if test -z "$PARAM_VUFIND_LOCAL_MODULES"; then
-        PARAM_VUFIND_LOCAL_MODULES="VuFindConsole,CPK,Debug"
+        PARAM_VUFIND_LOCAL_MODULES="VuFindConsole,CPK"
         if test -d "$PARAM_VUFIND_SRC/module/Statistics" ; then
             PARAM_VUFIND_LOCAL_MODULES="$PARAM_VUFIND_LOCAL_MODULES,Statistics"
         fi
