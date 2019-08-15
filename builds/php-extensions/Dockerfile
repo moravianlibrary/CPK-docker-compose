@@ -10,6 +10,7 @@ LABEL description="Based on the 'php:7.3-apache-buster' build with appended modu
 
 ARG PARAM_XDEBUG_ENABLED=false
 ARG PARAM_AGGRESSIVE_OPCACHE=false
+ARG PARAM_XDEBUG_PROFILER_TRIGGER_VALUE=
 
 ARG TMP_DEV_PKGS=" \
         libfreetype6-dev \
