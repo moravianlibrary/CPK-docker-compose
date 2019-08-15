@@ -12,6 +12,10 @@ if test -f "$KEY_FILE"; then
     exit 0
 fi
 
+if test -z "$SSL_VALIDITY_DAYS"; then
+    SSL_VALIDITY_DAYS="3650"
+fi
+
 openssl req \
     -x509 \
     -newkey rsa:4096 \
