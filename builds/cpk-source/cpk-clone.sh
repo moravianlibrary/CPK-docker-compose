@@ -10,4 +10,5 @@ if [ ! -z "$PARAM_VUFIND_BRANCH" ]; then
     chown www-data:www-data "$PARAM_VUFIND_SRC/log"
     cd "$PARAM_VUFIND_SRC"
     php util/cssBuilder.php
+    curl --silent --show-error https://getcomposer.org/installer | php -- --install-dir "${PARAM_VUFIND_SRC}"
 fi;

@@ -49,6 +49,14 @@ init_eds_config() {
     fi;
 }
 
+init_autoload() {
+    if [ "$PARAM_VUFIND_RUN_ENV" == "production" ]; then
+        cd "$PARAM_VUFIND_SRC"
+        ./composer.phar dump-autoload -o --apcu
+    fi;
+}
+
 init_config_local "$@"
 init_eds_config "$@"
+init_autoload "$@"
 exit $?
