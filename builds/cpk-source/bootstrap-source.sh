@@ -22,6 +22,22 @@ init_config_local() {
         -e "s#PARAM_VUFIND_GOOGLE_API_KEY#${PARAM_VUFIND_GOOGLE_API_KEY}#g" \
         -e "s#PARAM_VUFIND_INFO_KNIHOVNY#${PARAM_VUFIND_INFO_KNIHOVNY}#g" \
         "$CONFIG_LOCAL"
+    if [ -n "$PARAM_VUFIND_PROXY_HOST" ]; then
+        cat <<PROXY_CONFIG >> "$CONFIG_LOCAL"
+
+[Proxy]
+type = curl
+host = ${PARAM_VUFIND_PROXY_HOST}
+port = ${PARAM_VUFIND_PROXY_PORT}
+username = ${PARAM_VUFIND_PROXY_USERNAME}
+password = ${PARAM_VUFIND_PROXY_PASSWORD}
+non_proxy_host[] = cache.obalkyknih.cz
+non_proxy_host[] = cpk-back.mzk.cz
+non_proxy_host[] = cpk-front.mzk.cz
+non_proxy_host[] = frontie.cpk-infra.mzk.cz
+non_proxy_host[] = backie.cpk-infra.mzk.cz
+PROXY_CONFIG
+    fi;
 }
 
 init_eds_config() {
