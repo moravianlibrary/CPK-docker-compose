@@ -87,12 +87,11 @@ RUN pecl install \
         apcu \
         apcu_bc-beta \
         xdebug \
-        mcrypt-1.0.2 \
-        redis
+        mcrypt-1.0.2
 
 # Enable all installed modules
 RUN docker-php-ext-enable \
-        apcu redis
+        apcu
 
 # Manually enable apc (it's beta version)
 # https://github.com/krakjoe/apcu/issues/137#issuecomment-150760383
