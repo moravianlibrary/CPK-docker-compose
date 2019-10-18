@@ -23,6 +23,8 @@ EOF
     if [ "$PARAM_AGGRESSIVE_OPCACHE" == true ]; then
         echo "opcache.validate_timestamps=0" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
     fi;
+
+    sed -i "s/SECLEVEL=2/SECLEVEL=1/" /usr/lib/ssl/openssl.cnf
 }
 
 main "$@"
