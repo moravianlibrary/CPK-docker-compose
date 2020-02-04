@@ -6,7 +6,7 @@ main() {
         cat <<EOF >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 [Xdebug]
 xdebug.remote_enable=true
-xdebug.remote_host=172.17.0.1
+xdebug.remote_host=$PARAM_XDEBUG_REMOTE_HOST
 EOF
         if [ ! -z "$PARAM_XDEBUG_PROFILER_TRIGGER_VALUE" ]; then
             PROFILER_OUTPUT_DIRECTORY="/var/www/cpk/profiler"
