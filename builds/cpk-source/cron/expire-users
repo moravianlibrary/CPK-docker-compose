@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /var/www/cpk
+VUFIND_HOME=/var/www/cpk/ VUFIND_LOCAL_MODULES=CPK VUFIND_LOCAL_DIR=local/knihovny php public/index.php util expire_users
