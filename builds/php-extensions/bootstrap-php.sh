@@ -6,7 +6,7 @@ main() {
         cat <<EOF >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 [Xdebug]
 xdebug.remote_enable=true
-xdebug.remote_host=172.17.0.1
+xdebug.remote_host=$PARAM_XDEBUG_REMOTE_HOST
 EOF
         if [ ! -z "$PARAM_XDEBUG_PROFILER_TRIGGER_VALUE" ]; then
             PROFILER_OUTPUT_DIRECTORY="/var/www/cpk/profiler"
@@ -23,6 +23,8 @@ EOF
     if [ "$PARAM_AGGRESSIVE_OPCACHE" == true ]; then
         echo "opcache.validate_timestamps=0" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
     fi;
+
+    sed -i "s/SECLEVEL=2/SECLEVEL=1/" /usr/lib/ssl/openssl.cnf
 }
 
 main "$@"
