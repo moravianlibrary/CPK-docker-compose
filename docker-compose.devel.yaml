@@ -14,6 +14,7 @@ services:
                 PARAM_VUFIND_COMMIT_HASH: ""
         volumes:
             - "./data/devel/:/data/"
+            - "./certs:/var/www/cpk/local/knihovny/config/vufind/certs:ro"
         network_mode: bridge
     devel-10000:
         extends:
