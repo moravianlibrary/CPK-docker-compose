@@ -17,4 +17,5 @@ services:
             - "./home/bashrc:/root/.bashrc:ro"
             - "./home/bash_aliases:/root/.bash_aliases:ro"
             - "./home/vimrc:/root/.vimrc:ro"
+            - "./certs:/data/www/cpk/local/knihovny.cz/certs:ro"
         network_mode: bridge
