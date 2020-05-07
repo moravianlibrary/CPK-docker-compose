@@ -17,5 +17,5 @@ services:
             - "./home/bashrc:/root/.bashrc:ro"
             - "./home/bash_aliases:/root/.bash_aliases:ro"
             - "./home/vimrc:/root/.vimrc:ro"
-            - "./certs:/var/www/cpk/local/knihovny/config/vufind/certs:ro"
+            - "./certs:/var/www/cpk/certs:ro"
         network_mode: bridge
