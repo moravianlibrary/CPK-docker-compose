@@ -76,3 +76,69 @@ services:
         container_name: "${CONTAINER_NAME:-vufind-devel-10009}"
         environment:
             PARAM_VUFIND_SSL_PORT: "10009"
+    devel-10010:
+        extends:
+            service: devel
+        container_name: "${CONTAINER_NAME:-vufind-devel-10010}"
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10010"
+    devel-10011:
+        extends:
+            service: devel
+        container_name: "${CONTAINER_NAME:-vufind-devel-10011}"
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10011"
+    devel-10012:
+        extends:
+            service: devel
+        container_name: "${CONTAINER_NAME:-vufind-devel-10012}"
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10012"
+    devel-10013:
+        extends:
+            service: devel
+        container_name: "${CONTAINER_NAME:-vufind-devel-10013}"
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10013"
+    devel-10014:
+        extends:
+            service: devel
+        container_name: "${CONTAINER_NAME:-vufind-devel-10014}"
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10014"
+    devel-10015:
+        extends:
+            service: devel
+        container_name: "${CONTAINER_NAME:-vufind-devel-10015}"
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10015"
+    devel-10016:
+        extends:
+            service: devel
+        container_name: "${CONTAINER_NAME:-vufind-devel-10016}"
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10016"
+    devel-10017:
+        extends:
+            service: devel
+        container_name: "${CONTAINER_NAME:-vufind-devel-10017}"
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10017"
+    devel-10018:
+        extends:
+            service: devel
+        container_name: "${CONTAINER_NAME:-vufind-devel-10018}"
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10018"
+    devel-10019:
+        extends:
+            service: devel
+        container_name: "${CONTAINER_NAME:-vufind-devel-10019}"
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10019"
+    devel-10020:
+        extends:
+            service: devel
+        container_name: "${CONTAINER_NAME:-vufind-devel-10020}"
+        environment:
+            PARAM_VUFIND_SSL_PORT: "10020"
