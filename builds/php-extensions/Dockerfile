@@ -121,9 +121,14 @@ RUN NR_INSTALL_SILENT=1 newrelic-install  install ; rm /usr/local/etc/php/conf.d
 COPY conf/php/newrelic.ini /usr/local/etc/php/conf.d/newrelic.ini.disabled
 
 # Add certificates for GEANT OV RSA CA 4
+# Also add Let's Encrypt R3 and Let's Encrypt E1 because in kfbz they are unable to set up web server properly
 RUN mkdir -p /usr/share/ca-certificates/mzk/ && \
   curl --silent "https://pki.cesnet.cz/_media/certs/geant_ov_rsa_ca_4.pem" > /usr/share/ca-certificates/mzk/geant_ov_rsa_ca_4.pem && \
+  curl --silent "https://letsencrypt.org/certs/lets-encrypt-r3.pem" > /usr/share/ca-certificates/mzk/lets-encrypt-r3.pem && \
+  curl --silent "https://letsencrypt.org/certs/lets-encrypt-e1.pem" > /usr/share/ca-certificates/mzk/lets-encrypt-e1.pem && \
   echo "mzk/geant_ov_rsa_ca_4.pem" >> /etc/ca-certificates.conf && \
+  echo "mzk/lets-encrypt-r3.pem" >> /etc/ca-certificates.conf && \
+  echo "mzk/lets-encrypt-e1.pem" >> /etc/ca-certificates.conf && \
   update-ca-certificates
 
 # Clean up after building from sources
